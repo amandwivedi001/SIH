@@ -353,3 +353,4 @@ MigrationBackup/
 .ionide/
 
 # End of https://mrkandreev.name/snippets/gitignore-generator/#vs
+.env
