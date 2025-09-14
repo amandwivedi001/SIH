@@ -1,21 +1,23 @@
+// src/App.jsx
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { ToastProvider } from "./Components/ui/ToastProvider";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import LoginPage from "./Components/LoginPage";
-// import Home from "./Components/pagess/Home";
+import TrackingPage from "./Components/tracking/TrackingPage";
 
 function App() {
   return (
     <ToastProvider>
-      <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 min-h-screen flex flex-col">
-        <Header />
-        <main className="flex-grow flex items-center justify-center">
-          <LoginPage/>
-        </main>
-        <Footer />
-      </div>
+      <Header />
+      <main className="min-h-screen flex flex-col">
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/tracking" element={<TrackingPage />} />
+        </Routes>
+      </main>
+      <Footer />
     </ToastProvider>
   );
 }
