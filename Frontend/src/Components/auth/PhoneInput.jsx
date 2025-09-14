@@ -16,6 +16,7 @@ const PhoneInput = ({ value, onChange, error, isLoading }) => {
                 Mobile Number
             </label>
             <input
+                name="Phone"
                 id="phone"
                 type="tel"
                 placeholder="Enter 10-digit mobile"
