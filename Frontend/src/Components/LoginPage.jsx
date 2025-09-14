@@ -5,8 +5,9 @@ const LoginPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white flex items-center justify-center">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex flex-col lg:flex-row items-center lg:items-stretch gap-12">
-          
+        <div className="flex flex-col-reverse lg:flex-row
+ items-center lg:items-stretch gap-12">
+
           {/* Left Section: Info */}
           <div className="lg:w-1/2 space-y-8 text-center lg:text-left">
             <h1 className="text-5xl sm:text-6xl font-extrabold leading-tight">
