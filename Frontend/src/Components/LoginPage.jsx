@@ -37,7 +37,7 @@ const LoginPage = () => {
           </div>
 
         </div>
-      </div>
+      </div>  
     </div>
   );
 };
