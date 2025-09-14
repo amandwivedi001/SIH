@@ -31,6 +31,7 @@ const OtpInput = ({ value, onChange, error, isLoading }) => {
       <div className="flex justify-between gap-3">
         {[0, 1, 2, 3, 4, 5].map((i) => (
           <input
+          name="Otp"
             key={i}
             type="text"
             maxLength={1}
