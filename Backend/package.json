@@ -1,11 +1,13 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon ./src/index.js"
-  },
+  "dev": "nodemon ./src/index.js",
+  "simulator": "node simulator/simulator.js"
+},
+
   "author": "",
   "license": "ISC",
   "description": "",
