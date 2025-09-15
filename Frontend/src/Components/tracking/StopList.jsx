@@ -1,20 +1,19 @@
+// src/Components/tracking/StopsList.jsx
 import React from "react";
-import { stops } from "./mockData";
 
-const StopsList = ({ onSelectStop }) => {
+const StopsList = () => {
+  const stops = ["Market Square", "Town Hall", "Tech Park", "Airport Road"];
+
   return (
-    <div className="bg-white/10 backdrop-blur-md p-4 rounded-xl shadow-lg h-80 overflow-y-auto">
-      <h3 className="text-lg font-semibold mb-3 text-blue-400">
-        Nearby Bus Stops
-      </h3>
+    <div className="bg-white/10 backdrop-blur-xl rounded-xl p-6 shadow-md shadow-blue-900/30">
+      <h2 className="text-xl font-bold mb-4">Nearby Stops</h2>
       <ul className="space-y-2">
-        {stops.map((stop) => (
+        {stops.map((stop, i) => (
           <li
-            key={stop.id}
-            className="cursor-pointer p-2 bg-slate-800 rounded-lg hover:bg-slate-700 transition"
-            onClick={() => onSelectStop(stop)}
+            key={i}
+            className="p-3 rounded-lg bg-slate-800/60 hover:bg-slate-700/60 cursor-pointer transition"
           >
-            <span className="text-white">{stop.name}</span>
+            📍 {stop}
           </li>
         ))}
       </ul>
