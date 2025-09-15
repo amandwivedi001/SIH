@@ -8,10 +8,9 @@ const Header = () => {
 
   const navItems = [
     { to: "/features", label: "Features" },
-    { to: "/pricing", label: "Pricing" },
+    { to: "/languages", label: "Pricing" },
     { to: "/about", label: "About" },
     { to: "/contact", label: "Contact" },
-    { to: "/login", label: "Login" },
   ];
 
   return (
@@ -19,14 +18,14 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2">
             <div className="w-9 h-9 bg-gradient-to-br from-blue-600 to-emerald-500 rounded-lg flex items-center justify-center shadow-md shadow-blue-700/40">
               <Shield className="w-5 h-5 text-white" />
             </div>
             <span className="text-2xl font-extrabold bg-gradient-to-r from-blue-500 to-emerald-400 bg-clip-text text-transparent">
               TrackSecure
             </span>
-          </Link>
+          </div>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center space-x-8">
@@ -46,6 +45,7 @@ const Header = () => {
               </NavLink>
             ))}
           </nav>
+      
 
           {/* Desktop Buttons */}
           <div className="hidden md:flex items-center space-x-4">

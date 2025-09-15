@@ -31,9 +31,7 @@ export default defineConfig({
                sizes: ' ',
                type: ' ' 
             */
-           // aaur jo icons honge unko frontned ki public mein daaal dena
-
-            
+           // aaur jo icons honge unko frontned ki public mein daaal dena 
           }
         ]
       }
