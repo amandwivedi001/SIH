@@ -10,9 +10,7 @@ const PhoneInput = ({ value, onChange, error, isLoading }) => {
 
     return (
         <div className="space-y-2 relative">
-            <label htmlFor="phone" className="text-sm font-medium text-foreground text-se text-blue-200
-
-">
+            <label htmlFor="phone" className="text-sm font-medium text-foreground text-se text-blue-200">
                 Mobile Number
             </label>
             <input

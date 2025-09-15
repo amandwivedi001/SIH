@@ -17,14 +17,6 @@ const TrackingPage = () => {
       if (flag === "1") {
         setShowLoginMsg(true);
         sessionStorage.removeItem("tracksec_logged_in");
-
-        // Toast fallback
-        showToast({
-          title: "Login Successful",
-          description: "Welcome back! You’re now tracking buses in real time.",
-          type: "success",
-        });
-
         // progress bar countdown
         let p = 100;
         const interval = setInterval(() => {
@@ -54,7 +46,7 @@ const TrackingPage = () => {
         </div>
       )}
 
-      <div className="pt-24 px-6 pb-12">
+      <div className="pt-11 px-6 pb-12">
         <div className="max-w-7xl mx-auto">
           {/* Destination input */}
           <DestinationSearch />
@@ -64,11 +56,6 @@ const TrackingPage = () => {
             <div className="space-y-6 lg:col-span-1">
               <NearestStop />
               <StopsList />
-            </div>
-
-            {/* Right column: map */}
-            <div className="lg:col-span-2">
-              <MapView />
             </div>
           </div>
         </div>
