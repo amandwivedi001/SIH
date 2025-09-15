@@ -21,8 +21,7 @@ const PhoneInput = ({ value, onChange, error, isLoading }) => {
                 value={value}
                 onChange={(e) => handleChange(e.target.value)}
                 disabled={isLoading}
-                className={`w-full px-4 py-2 rounded-lg border ${error ? "border-destructive" : "border-border/50"
-                    } bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary text-white`}
+                className="w-full px-4 py-3 rounded-lg bg-slate-800/70 border border-slate-600 text-white placeholder-slate-400 focus:ring-2 focus:ring-blue-500 focus:outline-none disabled:opacity-50"
             />
             {isLoading && (
                 <span className="absolute right-3 top-2.5 animate-spin text-primary">

@@ -22,7 +22,7 @@ const router = createBrowserRouter(
       <Route path='contact' element = {<Contact />}></Route>
       <Route path='about' element = {<About />}></Route>
       <Route path='feature' element = {<Features />}></Route>
-      <Route path='languages' element = {<Languages />}></Route>
+      <Route path='otpVerification' element = {<LoginPage />}></Route>
       </Route>
   )
 )
