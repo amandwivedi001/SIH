@@ -19,11 +19,11 @@ const TrackingPage = () => {
         sessionStorage.removeItem("tracksec_logged_in");
 
         // Toast fallback
-        showToast({
-          title: "Login Successful",
-          description: "Welcome back! You’re now tracking buses in real time.",
-          type: "success",
-        });
+        // showToast({
+        //   title: "Login Successful",
+        //   description: "Welcome back! You’re now tracking buses in real time.",
+        //   type: "success",
+        // });
 
         // progress bar countdown
         let p = 100;
@@ -54,7 +54,7 @@ const TrackingPage = () => {
         </div>
       )}
 
-      <div className="pt-24 px-6 pb-12">
+      <div className="pt-11 px-6 pb-12">
         <div className="max-w-7xl mx-auto">
           {/* Destination input */}
           <DestinationSearch />
