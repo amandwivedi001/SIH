@@ -1,6 +1,7 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import busRoutes from "../routes/busRoutes.js"; 
 
 const app = express();
 
@@ -14,7 +15,8 @@ app.use(cors({
 app.use(express.json());                            // for parsing incoming json request and make data available in req.body
 app.use(express.urlencoded({ extended: true }));    // for parsing URL-encoded data (from forms) ====== extended true allows nested objects like {user : {name: "Kylie Jenner"}}
 app.use(express.static("public"));                  // serve static files from "public" folder (CSS, JS, images, etc)
-app.use(cookieParser());                            // Parse all cookies
+app.use(cookieParser());  
+//  app.use("/bus",busRoutes);                          // Parse all cookies
 
 import { authRoute } from "./routes/auth.route.js";
 

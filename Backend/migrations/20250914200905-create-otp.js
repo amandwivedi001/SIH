@@ -3,7 +3,7 @@
 export default {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Otps', {
-      id: {
+      otp_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -16,14 +16,6 @@ export default {
         type: Sequelize.STRING
       },
       expiresAt: {
-        type: Sequelize.DATE
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
         type: Sequelize.DATE
       }
     });
