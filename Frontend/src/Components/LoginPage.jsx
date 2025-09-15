@@ -10,6 +10,7 @@ const LoginPage = () => {
   const step = location.state?.step || "phone";
   const email = location.state?.email || "";
   const mobile = location.state?.mobile || "";
+  const requestId = location.state?.requestId || "";
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white flex items-center justify-center">
@@ -53,7 +54,7 @@ const LoginPage = () => {
           {/* Right Section: Login Form (desktop only) */}
           <div className="lg:w-1/2 w-full flex justify-center items-center">
             <div className="hidden lg:block w-full max-w-lg">
-              <LoginForm initialStep={step} initialEmail={email} initialMobile={mobile} />
+              <LoginForm initialStep={step} initialEmail={email} initialMobile={mobile} initialRequestId={requestId}/>
             </div>
           </div>
 
