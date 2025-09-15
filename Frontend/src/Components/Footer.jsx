@@ -1,8 +1,11 @@
 import React from "react";
 import { Shield, Mail, Phone, MapPin } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link,useLocation } from "react-router-dom";
 
 const Footer = () => {
+  const location = useLocation();
+  const isLogin = location.pathname === "/";
+  if (!isLogin) return null;
   return (
     <footer className="bg-slate-900/80 backdrop-blur-xl border-t border-blue-500/20 mt-auto shadow-inner shadow-blue-900/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

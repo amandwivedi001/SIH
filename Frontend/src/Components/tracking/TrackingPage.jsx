@@ -5,6 +5,7 @@ import NearestStop from "./NearestStop";
 import StopsList from "./StopList";
 import MapView from "./MapView";
 import { useToast } from "../ui/ToastProvider";
+import RecentSearches from "./RecentSearches";
 
 const TrackingPage = () => {
   const [showLoginMsg, setShowLoginMsg] = useState(false);
@@ -50,16 +51,24 @@ const TrackingPage = () => {
         <div className="max-w-7xl mx-auto">
           {/* Destination input */}
           <DestinationSearch />
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
+          {/* Recent Searches Card */}
+          <RecentSearches/>
+          <main className="mt-8 w-full bg-gray-900 text-white">
             {/* Left column */}
             <div className="space-y-6 lg:col-span-1">
               <NearestStop />
-              <StopsList />
             </div>
-          </div>
+          </main>
         </div>
       </div>
+      <nav className="w-full "> {/* A full-width nav container, with some top margin */}
+      <button 
+        className="w-full bg-gray-900 hover:bg-slate-700/60 text-white font-semibold py-4  rounded-lg text-lg tracking-wide transition-colors"
+        onClick={() => {/* Function to open the 'All Stops' overlay */}}
+      >
+        SEE ALL BUS STOPS AROUND YOU
+      </button>
+    </nav>
     </div>
   );
 };
