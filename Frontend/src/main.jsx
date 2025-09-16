@@ -13,25 +13,27 @@ import Features from "./Components/HeaderCompo/Features";
 import Languages from "./Components/HeaderCompo/Languages";
 import { ToastProvider } from "./Components/ui/ToastProvider";
 
+const base = import.meta.env.VITE_BASE_PATH || "/routex";
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/' element = {<Layout />}>
-      <Route path='' element = {<LoginPage />}></Route>
-      <Route path='tracking' element = {<TrackingPage />}></Route>
-      <Route path='contact' element = {<Contact />}></Route>
-      <Route path='about' element = {<About />}></Route>
-      <Route path='feature' element = {<Features />}></Route>
-      <Route path='languages' element = {<Languages />}></Route>
-      </Route>
-  )
-)
+    <Route path='/' element={<Layout />}>
+      <Route path='' element={<LoginPage />}></Route>
+      <Route path='tracking' element={<TrackingPage />}></Route>
+      <Route path='contact' element={<Contact />}></Route>
+      <Route path='about' element={<About />}></Route>
+      <Route path='feature' element={<Features />}></Route>
+      <Route path='verify-otp' element={<LoginPage />}></Route>
+    </Route>
+  ),
+);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <ToastProvider >
     {/* <BrowserRouter>
       <App />
     </BrowserRouter> */}
-    <RouterProvider router={router}/>
+    <RouterProvider router={router} />
   </ToastProvider>
 );
