@@ -16,8 +16,10 @@ app.use(express.json());                            // for parsing incoming json
 app.use(express.urlencoded({ extended: true }));    // for parsing URL-encoded data (from forms) ====== extended true allows nested objects like {user : {name: "Kylie Jenner"}}
 app.use(express.static("public"));                  // serve static files from "public" folder (CSS, JS, images, etc)
 app.use(cookieParser());  
- app.use("/bus",busRoutes);                          // Parse all cookies
+//  app.use("/bus",busRoutes);                          // Parse all cookies
 
+import { authRoute } from "./routes/auth.route.js";
 
+app.use("/api/v1/auth", authRoute);
 
 export default app;

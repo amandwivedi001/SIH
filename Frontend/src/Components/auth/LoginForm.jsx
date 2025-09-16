@@ -9,7 +9,8 @@ import PhoneInput from "./PhoneInput";
 import OtpInput from "./OtpInput";
 import LoadingSpinner from "./LoadingSpinner";
 
-const API = "http://localhost:8000/api/v1";
+const API  = "http://localhost:8000/api/v1"
+
 
 const LoginForm = ({ initialStep = "phone", initialEmail = "", initialMobile = "", initialRequestId = "" }) => {
   const [step, setStep] = useState(initialStep);
@@ -77,10 +78,6 @@ const LoginForm = ({ initialStep = "phone", initialEmail = "", initialMobile = "
     if (!otp || otp.length !== 6) {
       setErrors({ otp: "Enter 6-digit OTP" });
       showToast({ title: "Invalid OTP", description: "OTP must be 6 digits", type: "error" });
-      return;
-    }
-    if (!requestId) {
-      showToast({ title: "Session missing", description: "Please resend OTP", type: "error" });
       return;
     }
 
