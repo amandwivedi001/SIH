@@ -1,4 +1,3 @@
-// src/Components/tracking/DestinationSearch.jsx
 import React, { useState } from "react";
 
 const DestinationSearch = () => {

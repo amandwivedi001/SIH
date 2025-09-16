@@ -9,7 +9,7 @@ import PhoneInput from "./PhoneInput";
 import OtpInput from "./OtpInput";
 import LoadingSpinner from "./LoadingSpinner";
 
-const API = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API = "http://localhost:8000/api/v1";
 
 const LoginForm = ({ initialStep = "phone", initialEmail = "", initialMobile = "", initialRequestId = "" }) => {
   const [step, setStep] = useState(initialStep);
@@ -48,7 +48,7 @@ const LoginForm = ({ initialStep = "phone", initialEmail = "", initialMobile = "
 
     setLoading(true);
     try {
-      const res = await fetch(`${API}/api/auth/send-otp`, {
+      const res = await fetch(`${API}/auth/send-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, phone: `${mobile}` })
@@ -86,7 +86,7 @@ const LoginForm = ({ initialStep = "phone", initialEmail = "", initialMobile = "
 
     setLoading(true);
     try {
-      const res = await fetch(`${API}/api/auth/verify-otp`, {
+      const res = await fetch(`${API}/auth/verify-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, phone: `${mobile}`, otp })
