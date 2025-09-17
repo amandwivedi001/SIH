@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
   "dev": "nodemon ./src/index.js",
-  "simulator": "node simulator/simulator.js"
+  "simulator": "node ./simulator/simulator.js"
 },
 
   "author": "",
