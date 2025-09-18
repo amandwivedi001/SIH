@@ -66,7 +66,7 @@ export default function MapView({
   busStops = [],
   initialCenter = [20.5937, 78.9629], // India center as safe default
   initialZoom = 12,
-  className = "h-[500px] w-full rounded-lg shadow",
+  className = "h-[1000px] w-full rounded-lg shadow",
 }) {
   const [currentPosition, setCurrentPosition] = useState(null);
   const [geoError, setGeoError] = useState(null);
@@ -143,7 +143,7 @@ export default function MapView({
             {/* accuracy circle (optional) */}
             <Circle
               center={currentPosition}
-              radius={40}
+              radius={200}
               pathOptions={{ color: "#22c55e", fillColor: "#bbf7d0", fillOpacity: 0.18 }}
             />
 
