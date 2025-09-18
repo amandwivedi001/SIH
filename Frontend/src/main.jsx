@@ -13,8 +13,6 @@ import Features from "./Components/HeaderCompo/Features";
 import Languages from "./Components/HeaderCompo/Languages";
 import { ToastProvider } from "./Components/ui/ToastProvider";
 
-const base = import.meta.env.VITE_BASE_PATH || "/routex";
-
 
 const router = createBrowserRouter(
   createRoutesFromElements(
