@@ -12,8 +12,8 @@ import About from "./Components/HeaderCompo/About";
 import Features from "./Components/HeaderCompo/Features";
 import Languages from "./Components/HeaderCompo/Languages";
 import { ToastProvider } from "./Components/ui/ToastProvider";
-
-const base = import.meta.env.VITE_BASE_PATH || "/routex";
+import MapView from "./Components/tracking/MapView";
+import DestinationSearchPage from "./Components/tracking/DestinationSearchPage";
 
 
 const router = createBrowserRouter(
@@ -25,6 +25,8 @@ const router = createBrowserRouter(
       <Route path='about' element={<About />}></Route>
       <Route path='feature' element={<Features />}></Route>
       <Route path='verify-otp' element={<LoginPage />}></Route>
+      <Route path="mapView" element={<MapView />} />
+      <Route path="destinationSearch" element={<DestinationSearchPage />} />
     </Route>
   ),
 );
