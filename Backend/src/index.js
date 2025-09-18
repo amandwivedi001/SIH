@@ -4,17 +4,17 @@ import 'dotenv/config'
 
 console.log('DB USER:', process.env.DB_USERNAME);
 console.log('DB HOST:', process.env.DB_HOST);
-// console.log('DB PORT:', process.env.DB_PORT);
+console.log('DB PORT:', process.env.DB_PORT);
 
 
 import 'dotenv/config';
 import express from "express";
 import bodyParser from "body-parser";
 import Redis from "ioredis";
-// import "../config/mqtt.js";; 
+import "../config/mqtt.js";; 
 import { connectDB, sequelize } from './db/connection.js';
 import app from "./app.js"; // if you have separate routes/middleware
-// import "../simulator/simulator.js"
+import "../simulator/simulator.js"
 
 
 
