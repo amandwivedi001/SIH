@@ -6,12 +6,13 @@ const DestinationSearch = () => {
   const navigate = useNavigate();
 
   const handleSearch = () => {
-    if (destination.trim() === "") {
-      alert("Please enter a destination.");
-    } else {
-      alert(`Finding route to: ${destination}`);
-    }
-  };
+  if (destination.trim() === "") {
+    alert("Please enter a destination.");
+  } else {
+    navigate(`/trip-planner`);
+  }
+};
+
 
   const handleInputClick = () => {
     navigate("/destinationSearch"); // ✅ always navigate

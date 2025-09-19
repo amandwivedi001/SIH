@@ -7,7 +7,7 @@ export const Card = ({ children, className = "" }) => {
       className={`
         relative rounded-2xl overflow-hidden
         border border-[#EDB74B]/30 
-        bg-white/90
+        bg-amber-200
         backdrop-blur-xl shadow-lg shadow-[#EDB74B]/10
         hover:shadow-[#EDB74B]/20 transition-all duration-300
         ${className}
@@ -47,7 +47,7 @@ export const CardTitle = ({ children, className = "" }) => {
 // Description
 export const CardDescription = ({ children, className = "" }) => {
   return (
-    <p className={`mt-2 text-sm text-slate-600 ${className}`}>
+    <p className={` mt-2 text-sm text-slate-600 ${className}`}>
       {children}
     </p>
   );
