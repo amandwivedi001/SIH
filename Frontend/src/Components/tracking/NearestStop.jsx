@@ -2,44 +2,67 @@
 import React, { useState, useEffect } from "react";
 import { MapPin, Clock, Bus, RefreshCw } from "lucide-react";
 
-// Mock API function
-const fetchNearestStopData = () => {
-  return new Promise((resolve) => {
+// Mock API function with location support
+const fetchNearestStopData = (userLocation) => {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve({
-        name: "Central Station",
-        distance: "200m",
-        buses: [
-          { id: 21, eta: "5 min", destination: "City Mall" },
-          { id: 45, eta: "8 min", destination: "Railway Station" },
-          { id: 12, eta: "12 min", destination: "University" },
-        ],
-      });
-    }, 1500);
+      if (!userLocation) {
+        reject("Location not available");
+      } else {
+        resolve({
+          name: "Central Station",
+          distance: "200m",
+          buses: [
+            { id: 21, eta: "5 min", destination: "City Mall" },
+            { id: 45, eta: "8 min", destination: "Railway Station" },
+            { id: 12, eta: "12 min", destination: "University" },
+          ],
+        });
+      }
+    }, 1200);
   });
 };
 
-const NearestStop = () => {
+const NearestStop = ({ userLocation, loadingLocation, geoError }) => {
   const [stop, setStop] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const loadData = async () => {
     setLoading(true);
+    setError(null);
     try {
-      const data = await fetchNearestStopData();
+      const data = await fetchNearestStopData(userLocation);
       setStop(data);
     } catch (err) {
-      setError("Failed to fetch data.");
-      console.error(err);
+      setError(err);
     } finally {
       setLoading(false);
     }
   };
 
+  // fetch when location is available
   useEffect(() => {
-    loadData();
-  }, []);
+    if (userLocation) {
+      loadData();
+    }
+  }, [userLocation]);
+
+  if (loadingLocation) {
+    return (
+      <div className="text-center p-6 text-slate-500 animate-pulse">
+        📍 Detecting your location...
+      </div>
+    );
+  }
+
+  if (geoError) {
+    return (
+      <div className="text-center p-6 text-red-500">
+        ❌ {geoError} <br /> Please allow location to see nearest bus stops.
+      </div>
+    );
+  }
 
   if (loading) {
     return (
@@ -50,7 +73,17 @@ const NearestStop = () => {
   }
 
   if (error) {
-    return <div className="text-center p-6 text-red-500">{error}</div>;
+    return (
+      <div className="text-center p-6 text-red-500">{error}</div>
+    );
+  }
+
+  if (!stop) {
+    return (
+      <div className="text-center p-6 text-slate-400">
+        ⚠️ No stop data available
+      </div>
+    );
   }
 
   return (
