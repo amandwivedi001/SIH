@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 const TrackingPage = () => {
   const [showLoginMsg, setShowLoginMsg] = useState(false);
-  const [progress, setProgress] = useState(100); // progress for banner
+  const [progress, setProgress] = useState(100);
   const { showToast } = useToast();
   const navigate = useNavigate();
 
@@ -19,7 +19,6 @@ const TrackingPage = () => {
       if (flag === "1") {
         setShowLoginMsg(true);
         sessionStorage.removeItem("tracksec_logged_in");
-        // progress bar countdown
         let p = 100;
         const interval = setInterval(() => {
           p -= 5;
@@ -35,17 +34,16 @@ const TrackingPage = () => {
     }
   }, [showToast]);
 
-  // ✅ navigate properly
   const goToMapView = () => {
-    navigate("/mapView"); // React Router will render <MapView />
+    navigate("/mapView");
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white relative">
-      {/* Login success banner */}
+    <div className="min-h-screen bg-white text-slate-900 relative">
+      {/* ✅ Login success banner */}
       {showLoginMsg && (
         <div className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 w-80">
-          <div className="bg-emerald-600 text-white px-6 py-3 rounded-lg shadow-lg animate-fade-in relative">
+          <div className="bg-emerald-500 text-white px-6 py-3 rounded-lg shadow-lg animate-fade-in relative">
             ✅ Successfully logged in
             <div
               className="absolute bottom-0 left-0 h-1 bg-white/60 transition-all"
@@ -56,15 +54,15 @@ const TrackingPage = () => {
       )}
 
       <div className="pt-11 px-6 pb-12">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto space-y-8">
           {/* Destination input */}
           <DestinationSearch />
 
-          {/* Recent Searches Card */}
+          {/* Recent Searches */}
           <RecentSearches />
 
-          <main className="mt-8 w-full bg-gray-900 text-white">
-            {/* Left column */}
+          {/* Section with nearest stop */}
+          <main className="mt-8 w-full bg-slate-50 rounded-2xl border border-slate-200 shadow-md p-6">
             <div className="space-y-6 lg:col-span-1">
               <NearestStop />
             </div>
@@ -72,11 +70,11 @@ const TrackingPage = () => {
         </div>
       </div>
 
-      {/* ✅ Button at bottom */}
+      {/* ✅ Bottom Button */}
       <nav className="w-full px-6 pb-8">
         <button
-          className="w-full bg-gray-900 hover:bg-slate-700/60 text-white font-semibold py-4 rounded-lg text-lg tracking-wide transition-colors"
-          onClick={goToMapView} // ✅ directly call function
+          className="w-full bg-[#EDB74B] hover:bg-[#d9a43a] text-slate-900 font-semibold py-4 rounded-lg text-lg tracking-wide transition-colors shadow-md shadow-yellow-700/20 focus:outline-none focus:ring-2 focus:ring-[#EDB74B]/50"
+          onClick={goToMapView}
         >
           SEE ALL BUS STOPS AROUND YOU
         </button>
