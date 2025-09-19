@@ -143,7 +143,7 @@ export default function MapView({
             {/* accuracy circle (optional) */}
             <Circle
               center={currentPosition}
-              radius={200}
+              radius={700}
               pathOptions={{ color: "#22c55e", fillColor: "#bbf7d0", fillOpacity: 0.18 }}
             />
 
