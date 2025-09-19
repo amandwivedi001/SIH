@@ -9,8 +9,7 @@ import PhoneInput from "./PhoneInput";
 import OtpInput from "./OtpInput";
 import LoadingSpinner from "./LoadingSpinner";
 
-const API  = "http://localhost:8000/api/v1"
-
+const API = "http://localhost:8000/api/v1";
 
 const LoginForm = ({ initialStep = "phone", initialEmail = "", initialMobile = "", initialRequestId = "" }) => {
   const [step, setStep] = useState(initialStep);
@@ -27,7 +26,6 @@ const LoginForm = ({ initialStep = "phone", initialEmail = "", initialMobile = "
   const isValidMobile = (s) => /^[6-9]\d{9}$/.test(s);
 
   useEffect(() => {
-    // sync props -> state (important when nav passes state)
     setStep(initialStep || "phone");
     setEmail(initialEmail || "");
     setMobile(initialMobile || "");
@@ -35,7 +33,6 @@ const LoginForm = ({ initialStep = "phone", initialEmail = "", initialMobile = "
     if ((initialStep || "phone") === "phone") setOtp("");
   }, [initialStep, initialEmail, initialMobile, initialRequestId]);
 
-  // Send OTP to backend
   const handleSendOtp = async () => {
     setErrors({});
     const newErrors = {};
@@ -57,11 +54,8 @@ const LoginForm = ({ initialStep = "phone", initialEmail = "", initialMobile = "
       const data = await res.json();
       if (!res.ok || !data.success) throw new Error(data.message || "Failed to send OTP");
 
-      // store requestId returned by backend
       setRequestId(data.requestId);
-      // navigate to OTP route and pass state
       navigate("/verify-otp", { state: { step: "otp", email, mobile, requestId: data.requestId } });
-      // also set local step so UI switches before route update
       setStep("otp");
       showToast({ title: "OTP Sent", description: `OTP sent to +91 ${mobile}`, type: "success" });
     } catch (err) {
@@ -72,7 +66,6 @@ const LoginForm = ({ initialStep = "phone", initialEmail = "", initialMobile = "
     }
   };
 
-  // Verify OTP with backend
   const handleVerifyOtp = async () => {
     setErrors({});
     if (!otp || otp.length !== 6) {
@@ -91,7 +84,6 @@ const LoginForm = ({ initialStep = "phone", initialEmail = "", initialMobile = "
       const data = await res.json();
       if (!res.ok || !data.success) throw new Error(data.message || "Verification failed");
 
-      // success: store token for demo
       if (data.token) sessionStorage.setItem("auth_token", data.token);
       sessionStorage.setItem("tracksec_logged_in", "1");
       navigate("/tracking");
@@ -104,33 +96,74 @@ const LoginForm = ({ initialStep = "phone", initialEmail = "", initialMobile = "
   };
 
   return (
-    <Card className="w-full max-w-lg bg-white/10 backdrop-blur-xl border border-blue-500/20 shadow-2xl rounded-3xl">
-      <CardHeader className="text-center py-8">
-        <CardTitle className="text-2xl font-bold">{step === "phone" ? "Login to TrackSecure" : "Verify Mobile"}</CardTitle>
-        <CardDescription className="text-slate-300 mt-2">{step === "phone" ? "Enter email & mobile" : "Enter the code sent to your phone"}</CardDescription>
+    <Card className="w-full max-w-lg bg-[#FFFBF5] border border-[#F3E5C7] shadow-xl shadow-[#EDB74B]/20 rounded-2xl">
+      <CardHeader className="text-center p-8">
+        <CardTitle className="text-3xl font-bold text-slate-800">
+          {step === "phone" ? "Welcome" : "Verify Your Mobile"}
+        </CardTitle>
+        <CardDescription className="text-slate-600 mt-2">
+          {step === "phone"
+            ? "Enter your details to log in."
+            : "Enter the 6-digit code sent to your phone."}
+        </CardDescription>
       </CardHeader>
 
       <CardContent className="px-8 pb-8">
         {step === "phone" && (
-          <div className="space-y-4">
+          <div className="space-y-6">
             <EmailInput value={email} onChange={setEmail} error={errors.email} isLoading={loading} />
             <PhoneInput value={mobile} onChange={setMobile} error={errors.mobile} isLoading={loading} />
-            <Button onClick={handleSendOtp} className="w-full" disabled={loading}>
-              {loading ? <><LoadingSpinner size="small" /><span className="ml-2">Sending...</span></> : "Send OTP"}
+            <Button
+              onClick={handleSendOtp}
+              className="w-full bg-[#EDB74B] hover:bg-[#d9a43a] text-slate-900 font-semibold py-3 transition-colors duration-300 focus:ring-2 focus:ring-offset-2 focus:ring-[#EDB74B]/70 focus:outline-none"
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <LoadingSpinner size="small" />
+                  <span className="ml-2">Sending...</span>
+                </>
+              ) : (
+                "Send OTP"
+              )}
             </Button>
           </div>
         )}
 
         {step === "otp" && (
-          <div className="space-y-4">
+          <div className="space-y-6">
             <OtpInput value={otp} onChange={setOtp} error={errors.otp} isLoading={loading} />
-            <Button onClick={handleVerifyOtp} className="w-full" disabled={loading || otp.length !== 6}>
-              {loading ? <><LoadingSpinner size="small" /><span className="ml-2">Verifying...</span></> : "Verify OTP"}
+            <Button
+              onClick={handleVerifyOtp}
+              className="w-full bg-[#EDB74B] hover:bg-[#d9a43a] text-slate-900 font-semibold py-3 transition-colors duration-300 focus:ring-2 focus:ring-offset-2 focus:ring-[#EDB74B]/70 focus:outline-none"
+              disabled={loading || otp.length !== 6}
+            >
+              {loading ? (
+                <>
+                  <LoadingSpinner size="small" />
+                  <span className="ml-2">Verifying...</span>
+                </>
+              ) : (
+                "Verify & Login"
+              )}
             </Button>
 
-            <div className="flex space-x-2">
-              <Button onClick={() => navigate("/")} variant="outline" className="flex-1">Back</Button>
-              <Button onClick={handleSendOtp} variant="ghost" className="flex-1">Resend</Button>
+            <div className="flex justify-between items-center pt-2">
+              <Button
+                onClick={() => navigate("/")}
+                variant="outline"
+                className="border-[#E6D9B6] text-slate-700 hover:bg-[#FAF3E6]"
+              >
+                Back
+              </Button>
+              <Button
+                onClick={handleSendOtp}
+                variant="link"
+                className="text-[#EDB74B] hover:text-[#c59130] p-0"
+                disabled={loading}
+              >
+                Resend Code
+              </Button>
             </div>
           </div>
         )}

@@ -1,7 +1,8 @@
 // src/Components/tracking/NearestStop.jsx
 import React, { useState, useEffect } from "react";
+import { MapPin, Clock, Bus, RefreshCw } from "lucide-react";
 
-// A mock function to simulate fetching data from an API
+// Mock API function
 const fetchNearestStopData = () => {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -14,37 +15,38 @@ const fetchNearestStopData = () => {
           { id: 12, eta: "12 min", destination: "University" },
         ],
       });
-    }, 1500); // Simulate a 1.5-second network delay
+    }, 1500);
   });
 };
 
-
 const NearestStop = () => {
-  // State to hold the stop data, loading status, and any errors
   const [stop, setStop] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // useEffect to fetch data when the component mounts
+  const loadData = async () => {
+    setLoading(true);
+    try {
+      const data = await fetchNearestStopData();
+      setStop(data);
+    } catch (err) {
+      setError("Failed to fetch data.");
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const data = await fetchNearestStopData();
-        setStop(data);
-      } catch (err) {
-        setError("Failed to fetch data.");
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
+    loadData();
+  }, []);
 
-    getData();
-  }, []); // The empty dependency array [] ensures this runs only once
-
-  // Conditional rendering based on loading and error states
   if (loading) {
-    return <div className="text-center p-6">Loading nearest stop...</div>;
+    return (
+      <div className="text-center p-6 text-slate-300 animate-pulse">
+        Loading nearest stop...
+      </div>
+    );
   }
 
   if (error) {
@@ -52,24 +54,54 @@ const NearestStop = () => {
   }
 
   return (
-    <div className="bg-white/10 backdrop-blur-xl rounded-xl p-6 shadow-md shadow-blue-900/30 hover:shadow-lg hover:shadow-blue-600/30 transition-all ">
-      <h2 className="text-xl font-bold mb-2">Nearest Stop</h2>
-      <p className="text-slate-300 mb-4">
-        📍 {stop.name} ({stop.distance} away)
+    <div className="bg-slate-900/60 backdrop-blur-xl rounded-2xl p-6 shadow-lg shadow-blue-900/40 border border-blue-500/10">
+      {/* Header with refresh button */}
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-2xl font-bold text-white">Nearest Stop</h2>
+        <button
+          onClick={loadData}
+          className="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/40 transition"
+          title="Refresh"
+        >
+          <RefreshCw className="w-5 h-5" />
+        </button>
+      </div>
+
+      {/* Stop Info */}
+      <p className="flex items-center gap-2 text-slate-300 mb-6">
+        <MapPin className="w-4 h-4 text-rose-400" />
+        <span className="font-medium">
+          {stop.name}{" "}
+          <span className="text-slate-400">({stop.distance} away)</span>
+        </span>
       </p>
 
-      <ul className="space-y-2">
+      {/* Bus Cards */}
+      <div className="space-y-3">
         {stop.buses.map((bus) => (
-          <li
+          <div
             key={bus.id}
-            className="flex justify-between items-center p-3 rounded-lg bg-slate-800/60 hover:bg-slate-700/60 transition"
+            className="flex items-center justify-between p-4 rounded-xl bg-slate-800/60 hover:bg-slate-700/60 transition transform hover:-translate-y-0.5 hover:shadow-md hover:shadow-blue-800/30"
           >
-             <span className="font-semibold">🚌 Bus #{bus.id}</span>
-            <span className="text-emerald-400 font-bold">{bus.eta}</span>
-            <span className="text-slate-400 text-sm">Bus #{bus.id}<span className="text-blue-500 font-bold">→</span>{bus.destination}</span>
-          </li>
+            {/* Left: Bus Info */}
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-emerald-500 shadow-md shadow-blue-900/30">
+                <Bus className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <p className="font-semibold text-white">Bus #{bus.id}</p>
+                <p className="text-sm text-slate-400">{bus.destination}</p>
+              </div>
+            </div>
+
+            {/* Right: ETA */}
+            <div className="flex items-center gap-1 text-emerald-400 font-bold">
+              <Clock className="w-4 h-4" />
+              {bus.eta}
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
