@@ -43,24 +43,24 @@ const NearestStop = () => {
 
   if (loading) {
     return (
-      <div className="text-center p-6 text-slate-300 animate-pulse">
+      <div className="text-center p-6 text-slate-500 animate-pulse">
         Loading nearest stop...
       </div>
     );
   }
 
   if (error) {
-    return <div className="text-center p-6 text-red-400">{error}</div>;
+    return <div className="text-center p-6 text-red-500">{error}</div>;
   }
 
   return (
-    <div className="bg-slate-900/60 backdrop-blur-xl rounded-2xl p-6 shadow-lg shadow-blue-900/40 border border-blue-500/10">
+    <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-md">
       {/* Header with refresh button */}
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-2xl font-bold text-white">Nearest Stop</h2>
+        <h2 className="text-2xl font-bold text-slate-900">Nearest Stop</h2>
         <button
           onClick={loadData}
-          className="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/40 transition"
+          className="p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition"
           title="Refresh"
         >
           <RefreshCw className="w-5 h-5" />
@@ -68,8 +68,8 @@ const NearestStop = () => {
       </div>
 
       {/* Stop Info */}
-      <p className="flex items-center gap-2 text-slate-300 mb-6">
-        <MapPin className="w-4 h-4 text-rose-400" />
+      <p className="flex items-center gap-2 text-slate-600 mb-6">
+        <MapPin className="w-4 h-4 text-[#EDB74B]" />
         <span className="font-medium">
           {stop.name}{" "}
           <span className="text-slate-400">({stop.distance} away)</span>
@@ -81,21 +81,21 @@ const NearestStop = () => {
         {stop.buses.map((bus) => (
           <div
             key={bus.id}
-            className="flex items-center justify-between p-4 rounded-xl bg-slate-800/60 hover:bg-slate-700/60 transition transform hover:-translate-y-0.5 hover:shadow-md hover:shadow-blue-800/30"
+            className="flex items-center justify-between p-4 rounded-xl border border-slate-200 bg-slate-50 hover:bg-[#EDB74B]/10 transition transform hover:-translate-y-0.5 hover:shadow-md"
           >
             {/* Left: Bus Info */}
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-emerald-500 shadow-md shadow-blue-900/30">
-                <Bus className="w-5 h-5 text-white" />
+              <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-[#EDB74B] text-white shadow-md">
+                <Bus className="w-5 h-5" />
               </div>
               <div>
-                <p className="font-semibold text-white">Bus #{bus.id}</p>
-                <p className="text-sm text-slate-400">{bus.destination}</p>
+                <p className="font-semibold text-slate-900">Bus #{bus.id}</p>
+                <p className="text-sm text-slate-600">{bus.destination}</p>
               </div>
             </div>
 
             {/* Right: ETA */}
-            <div className="flex items-center gap-1 text-emerald-400 font-bold">
+            <div className="flex items-center gap-1 text-emerald-600 font-bold">
               <Clock className="w-4 h-4" />
               {bus.eta}
             </div>
