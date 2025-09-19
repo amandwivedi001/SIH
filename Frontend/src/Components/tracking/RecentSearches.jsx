@@ -12,13 +12,12 @@ const RecentSearches = () => {
   ];
 
   return (
-    <div className="bg-slate-800/60 border border-slate-700 rounded-xl shadow-lg p-6 mt-4">
-      <h2 className="text-xl font-semibold text-blue-400 mb-6">
-        Recent Searches
+    <div className="bg-white border border-slate-200 rounded-2xl shadow-lg p-6 mt-8">
+      <h2 className="text-2xl font-extrabold text-slate-900 mb-6">
+        Recent <span className="text-[#EDB74B]">Searches</span>
       </h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {/* Map over the data array to render a card for each search */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {recentSearchesData.map((search) => (
           <SearchCard
             key={search.id}

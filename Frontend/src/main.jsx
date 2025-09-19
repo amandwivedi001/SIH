@@ -14,6 +14,7 @@ import Languages from "./Components/HeaderCompo/Languages";
 import { ToastProvider } from "./Components/ui/ToastProvider";
 import MapView from "./Components/tracking/MapView";
 import DestinationSearchPage from "./Components/tracking/DestinationSearchPage";
+import TripPlannerPage from "./Components/Result/TripPlannerPage";
 
 
 const router = createBrowserRouter(
@@ -27,6 +28,7 @@ const router = createBrowserRouter(
       <Route path='verify-otp' element={<LoginPage />}></Route>
       <Route path="mapView" element={<MapView />} />
       <Route path="destinationSearch" element={<DestinationSearchPage />} />
+      <Route path="trip-planner" element={<TripPlannerPage />} />
     </Route>
   ),
 );
