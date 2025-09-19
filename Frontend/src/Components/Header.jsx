@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Menu, X, Shield } from "lucide-react";
+import { Menu, X, LucideBusFront } from "lucide-react";
 import { Button } from "./ui/Button";
 import { NavLink, useLocation } from "react-router-dom";
 
@@ -26,10 +26,10 @@ const Header = () => {
             {/* Left: Logo */}
             <div className="flex items-center space-x-2">
               <div className="w-9 h-9 bg-gradient-to-br from-blue-600 to-emerald-500 rounded-lg flex items-center justify-center shadow-md shadow-blue-700/40">
-                <Shield className="w-5 h-5 text-white" />
+                <LucideBusFront className="w-5 h-5 text-white" />
               </div>
               <span className="text-2xl font-extrabold bg-gradient-to-r from-blue-500 to-emerald-400 bg-clip-text text-transparent">
-                TrackSecure
+                Safar
               </span>
             </div>
 
