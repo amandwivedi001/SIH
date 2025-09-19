@@ -1,16 +1,39 @@
 import React, { useState } from "react";
 
+// Geocoding helper function
+const geocode = async (place) => {
+  const res = await fetch(
+    `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(place)}`
+  );
+  const data = await res.json();
+  if (data.length > 0) {
+    return [parseFloat(data[0].lat), parseFloat(data[0].lon)];
+  }
+  return null;
+};
+
 const TripForm = ({ onSearch }) => {
   const [origin, setOrigin] = useState("");
   const [destination, setDestination] = useState("Rajwada, Indore");
   const [time, setTime] = useState("09:20");
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!origin || !destination) {
       alert("Please enter both origin and destination.");
       return;
     }
-    onSearch({ origin, destination, time });
+
+    // Convert place names to coordinates
+    const originCoords = await geocode(origin);
+    const destinationCoords = await geocode(destination);
+
+    if (!originCoords || !destinationCoords) {
+      alert("Could not find one or both locations. Try again.");
+      return;
+    }
+
+    // Send back coordinates instead of plain text
+    onSearch({ origin: originCoords, destination: destinationCoords, time });
   };
 
   return (

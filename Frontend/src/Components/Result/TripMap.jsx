@@ -1,12 +1,11 @@
 import React from "react";
-import { MapContainer, TileLayer, Marker, Popup, Polyline } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import RoutingMachine from "../RoutingMachine";
 
 const TripMap = ({ origin, destination }) => {
-  // Dummy coordinates (Indore Rajwada → IET DAVV)
-  const originCoords = [22.7196, 75.8577];
-  const destinationCoords = [22.6816, 75.8791];
-
-  const routeCoords = [originCoords, destinationCoords];
+  // Fallback dummy coords if none provided
+  const originCoords = origin || [22.7196, 75.8577]; // Rajwada
+  const destinationCoords = destination || [22.6816, 75.8791]; // IET DAVV
 
   return (
     <div className="h-[70vh] w-full">
@@ -14,13 +13,14 @@ const TripMap = ({ origin, destination }) => {
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
         <Marker position={originCoords}>
-          <Popup>Origin: {origin || "Rajwada"}</Popup>
+          <Popup>Origin</Popup>
         </Marker>
         <Marker position={destinationCoords}>
-          <Popup>Destination: {destination || "IET DAVV"}</Popup>
+          <Popup>Destination</Popup>
         </Marker>
 
-        <Polyline positions={routeCoords} color="blue" />
+        {/* Routing component */}
+        <RoutingMachine origin={originCoords} destination={destinationCoords} />
       </MapContainer>
     </div>
   );
