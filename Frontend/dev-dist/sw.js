@@ -5,7 +5,7 @@
  * You may obtain a copy of the License at
  *     http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIV26S,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -81,9 +81,15 @@ define(['./workbox-54d0af47'], (function (workbox) { 'use strict';
     "url": "registerSW.js",
     "revision": "3ca0b8505b4bec776b69afdba2768812"
   }, {
+<<<<<<< HEAD
     "url": "index.html",
     "revision": "0.roufm5bfjho"
   }], {});
+=======
+  "url": "index.html",
+  "revision": "0.jsslpf6mkbg"
+}], {});
+>>>>>>> 25858017c2a804a66ab08fdbce09a0e3cfe94d67
   workbox.cleanupOutdatedCaches();
   workbox.registerRoute(new workbox.NavigationRoute(workbox.createHandlerBoundToURL("index.html"), {
     allowlist: [/^\/$/]
