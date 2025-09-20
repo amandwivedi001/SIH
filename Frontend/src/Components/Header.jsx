@@ -23,15 +23,33 @@ const Header = () => {
       <header className="bg-white/90 backdrop-blur-lg border-b border-yellow-300/40 sticky top-0 z-50 shadow-md shadow-yellow-900/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            {/* Left: Logo */}
-<div className="flex items-center space-x-2">
- <div className="w-9 h-9 bg-gradient-to-br from-[#EDB74B] to-[#69541f] rounded-lg flex items-center justify-center shadow-md shadow-[#EDB74B]/40">
-    <LucideBusFront className="w-5 h-5 text-white" />
-  </div>
-  <span className="text-2xl font-extrabold bg-gradient-to-r from-[#EDB74B] to-[#69541f] bg-clip-text text-transparent">
-    Safar
-  </span>
-</div>
+            {/* Left: Govt + Safar Logos */}
+            <div className="flex items-center space-x-4">
+              {/* Govt of Punjab Logo + Text */}
+              <div className="flex items-center space-x-2">
+                <img
+                  src="../../../public/Government_Of_Punjab_(Black_On_White).svg" // replace with actual logo path
+                  alt="Govt. of Punjab"
+                  className="w-9 h-9 object-contain"
+                />
+                <span className=" font-semibold  ">
+                  Govt. of Punjab
+                </span>
+              </div>
+
+              {/* Divider Line */}
+              <div className="w-px h-6 bg-slate-300"></div>
+
+              {/* Safar Logo */}
+              <div className="flex items-center space-x-2">
+                <div className="w-9 h-9 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center shadow-md shadow-yellow-700/30">
+                  <LucideBusFront className="w-5 h-5 text-white" />
+                </div>
+                <span className="text-2xl font-extrabold bg-gradient-to-r from-yellow-500 to-yellow-600 bg-clip-text text-transparent">
+                  Safar
+                </span>
+              </div>
+            </div>
 
             {/* Center: Nav */}
             {!isTrackingPage && !isdes && !ismap && (
@@ -41,9 +59,10 @@ const Header = () => {
                     key={item.to}
                     to={item.to}
                     className={({ isActive }) =>
-                      `text-sm font-medium transition-colors ${isActive
-                        ? "text-yellow-600"
-                        : "text-slate-700 hover:text-yellow-600"
+                      `text-sm font-medium transition-colors ${
+                        isActive
+                          ? "text-yellow-600"
+                          : "text-slate-700 hover:text-yellow-600"
                       }`
                     }
                   >
@@ -113,8 +132,6 @@ const Header = () => {
                 >
                   Get Started
                 </Button>
-
-
               </div>
             </div>
           )}
