@@ -81,21 +81,9 @@ define(['./workbox-54d0af47'], (function (workbox) { 'use strict';
     "url": "registerSW.js",
     "revision": "3ca0b8505b4bec776b69afdba2768812"
   }, {
-<<<<<<< HEAD
     "url": "index.html",
-    "revision": "0.hipii930o2g"
+    "revision": "0.2f0euiruih8"
   }], {});
-=======
-<<<<<<< HEAD
-    "url": "index.html",
-    "revision": "0.roufm5bfjho"
-  }], {});
-=======
-  "url": "index.html",
-  "revision": "0.jsslpf6mkbg"
-}], {});
->>>>>>> 25858017c2a804a66ab08fdbce09a0e3cfe94d67
->>>>>>> f4aa57306487b78fdf66c4f8b43f6eb10527a05e
   workbox.cleanupOutdatedCaches();
   workbox.registerRoute(new workbox.NavigationRoute(workbox.createHandlerBoundToURL("index.html"), {
     allowlist: [/^\/$/]
