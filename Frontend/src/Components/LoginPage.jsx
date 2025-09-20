@@ -24,7 +24,7 @@ const LoginPage = () => {
             <div className="space-y-6 order-1">
               <h1 className="text-5xl sm:text-6xl font-extrabold leading-tight">
                 Secure Real-Time{" "}
-                <span className="text-[#EDB74B]">Device Tracking</span>
+                <span className="text-[#EDB74B]">Bus Tracking</span>
               </h1>
               <p className="text-lg text-slate-600 max-w-xl mx-auto lg:mx-0">
                 Monitor and track your valuable assets with enterprise-grade security,

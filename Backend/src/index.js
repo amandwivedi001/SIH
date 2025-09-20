@@ -4,30 +4,32 @@ import 'dotenv/config'
 
 console.log('DB USER:', process.env.DB_USERNAME);
 console.log('DB HOST:', process.env.DB_HOST);
-// console.log('DB PORT:', process.env.DB_PORT);
+console.log('DB PORT:', process.env.DB_PORT);
 
 
 import 'dotenv/config';
 import express from "express";
 import bodyParser from "body-parser";
 import Redis from "ioredis";
-// import "../config/mqtt.js";; 
+import "../config/mqtt.js";; 
 import { connectDB, sequelize } from './db/connection.js';
 import app from "./app.js"; // if you have separate routes/middleware
-// import "../simulator/simulator.js"
+import "../simulator/simulator.js"
 
 
 
 
 connectDB()
-    .then(async () => { // 👈 Make this async      
-        app.listen(process.env.PORT, () => {
-            console.log(`\n🚀 Server is running on the port: ${process.env.PORT}`);
-        })
-    })
-    .catch((err) => {
-        console.log("Database Connection Failed !!", err)
-    })
+  .then(async () => {      
+    const PORT = process.env.PORT || 5000; // 👈 store fallback
+    app.listen(PORT, () => {
+      console.log(`\n🚀 Server is running on the port: ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.log("Database Connection Failed !!", err);
+  });
+
 // // ✅ Use the app from app.js or define here, but not both!
 const server = express();
  server.use(bodyParser.json());

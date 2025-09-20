@@ -1,29 +1,35 @@
 import express from "express";
-import { getBusLocation } from "../controllers/busControllers.js";
+import { redisClient } from "../src/app.js";
+import { routeData } from "../controllers/busControllers.js";
 
 const router = express.Router();
+const BUS_ID = "Bus101"; // single bus constant
 
-
-router.get("/:busId", async (req, res) => {
-  const { busId } = req.params;
-
+// ----------------- Latest location -----------------
+router.get("/location", async (req, res) => {
   try {
-    const busData = await getBusLocation(busId);
+    const data = await redisClient.hgetall(`bus:${BUS_ID}`);
 
-    if (!busData) {
-      return res.status(404).json({ message: `No data found for bus ${busId}` });
+    if (!data || Object.keys(data).length === 0) {
+      return res.status(404).json({ message: `${BUS_ID} not found` });
     }
 
     res.json({
-      busId,
-      latitude: busData.latitude,
-      longitude: busData.longitude,
-      timestamp: busData.timestamp,
+      busId: BUS_ID,
+      lat: parseFloat(data.latitude),
+      lon: parseFloat(data.longitude),
+      name: data.name,
+      timestamp: data.timestamp,
     });
   } catch (err) {
-    console.error(" API error:", err);
-    res.status(500).json({ error: "Internal server error" });
+    console.error("❌ API error:", err);
+    res.status(500).json({ error: err.message });
   }
+});
+
+// ----------------- Full route -----------------
+router.get("/route", (req, res) => {
+  res.json({ busId: BUS_ID, route: routeData });
 });
 
 export default router;

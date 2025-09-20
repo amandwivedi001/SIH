@@ -1,5 +1,5 @@
 import React from "react";
-import { Shield, Mail, Phone, MapPin } from "lucide-react";
+import { LucideBusFront, Mail, Phone, MapPin } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 const Footer = () => {
@@ -15,11 +15,11 @@ const Footer = () => {
           {/* Company Info */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-9 h-9 bg-gradient-to-br from-[#EDB74B] to-[#CFA53A] rounded-lg flex items-center justify-center shadow-md shadow-[#EDB74B]/40">
-                <Shield className="w-5 h-5 text-[#1C1A16]" />
+              <div className="w-9 h-9 bg-gradient-to-br from-[#EDB74B] to-[#69541f] rounded-lg flex items-center justify-center shadow-md shadow-[#EDB74B]/40">
+                <LucideBusFront className="w-5 h-5 text-[#1C1A16]" />
               </div>
-              <span className="text-2xl font-extrabold bg-gradient-to-r from-[#EDB74B] to-[#CFA53A] bg-clip-text text-transparent">
-                TrackSecure
+              <span className="text-2xl font-extrabold bg-gradient-to-r from-[#EDB74B] to-[#69541f] bg-clip-text text-transparent">
+                Safar
               </span>
             </div>
             <p className="text-[#D6CFC0] mb-6 max-w-md leading-relaxed">

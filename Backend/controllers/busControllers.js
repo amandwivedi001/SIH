@@ -1,40 +1,56 @@
-import redis from "../config/redis.js";
+import Redis from "ioredis";
+import fs from "fs";
+import path from "path";
 
-// ✅ Update bus location in Redis
-const updateBusLocation = async (data) => {
-  const { busId, latitude, longitude, timestamp } = data;
-  const key = `bus:${busId}`;
+// ----------------- LOAD ROUTE JSON -----------------
+const routesPath = path.resolve("./public/routes.json");
+export const routeData = JSON.parse(fs.readFileSync(routesPath, "utf-8"));
+
+// ----------------- REDIS CLIENT -----------------
+const redis = new Redis({ host: "127.0.0.1", port: 6379 });
+
+// ----------------- UPDATE BUS LOCATION -----------------
+export const updateBusLocation = async ({ busId = "Bus101", lat, lon, name }) => {
+  if (!lat || !lon) return;
 
   try {
-    await redis.hset(key, {
-      latitude,
-      longitude,
-      timestamp,
+    await redis.hset(`bus:${busId}`, {
+      latitude: lat,
+      longitude: lon,
+      name: name || "",
+      timestamp: new Date().toISOString(),
     });
-    console.log(` Bus ${busId} updated in Redis`);
+
+    console.log(`✅ Updated Redis for ${busId}: ${lat}, ${lon}`);
   } catch (err) {
-    console.error(" Error updating bus in Redis:", err);
+    console.error("❌ Redis update error:", err);
   }
 };
 
-// ✅ Get bus location from Redis
-const getBusLocation = async (busId) => {
-  const key = `bus:${busId}`;
-
+// ----------------- GET LATEST BUS LOCATION -----------------
+export const getBusLocation = async (req, res) => {
+  const busId = "Bus101"; // fixed since you have only one bus
   try {
-    const busData = await redis.hgetall(key);
+    const data = await redis.hgetall(`bus:${busId}`);
 
-    if ( busData && Object.keys(busData).length > 0) {
-      console.log(` Fetched bus ${busId} from Redis`);
-      return busData;
-    } else {
-      console.log(` No data found for bus ${busId}`);
-      return null;
+    if (!data || Object.keys(data).length === 0) {
+      return res.status(404).json({ message: `${busId} not found` });
     }
+
+    res.json({
+      busId,
+      lat: parseFloat(data.latitude),
+      lon: parseFloat(data.longitude),
+      name: data.name,
+      timestamp: data.timestamp,
+    });
   } catch (err) {
-    console.error(" Error getting bus from Redis:", err);
-    return null;
+    console.error("❌ API error:", err);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
-export { updateBusLocation, getBusLocation };
+// ----------------- GET FULL ROUTE -----------------
+export const getBusRoute = (req, res) => {
+  res.json({ busId: "Bus101", route: routeData });
+};

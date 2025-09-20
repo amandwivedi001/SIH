@@ -24,15 +24,14 @@ const Header = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Left: Logo */}
-            <div className="flex items-center space-x-2">
-              <div className="w-9 h-9 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center shadow-md shadow-yellow-700/30">
-                <LucideBusFront className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-2xl font-extrabold bg-gradient-to-r from-yellow-500 to-yellow-600 bg-clip-text text-transparent">
-                Safar
-              </span>
-            </div>
-
+<div className="flex items-center space-x-2">
+ <div className="w-9 h-9 bg-gradient-to-br from-[#EDB74B] to-[#69541f] rounded-lg flex items-center justify-center shadow-md shadow-[#EDB74B]/40">
+    <LucideBusFront className="w-5 h-5 text-white" />
+  </div>
+  <span className="text-2xl font-extrabold bg-gradient-to-r from-[#EDB74B] to-[#69541f] bg-clip-text text-transparent">
+    Safar
+  </span>
+</div>
 
             {/* Center: Nav */}
             {!isTrackingPage && !isdes && !ismap && (
