@@ -2,9 +2,9 @@ import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import RoutingMachine from "../RoutingMachine";
 
-const TripMap = ({ origin, destination, busStops = [] }) => {
-  const originCoords = origin || [22.7196, 75.8577];
-  const destinationCoords = destination || [22.6816, 75.8791];
+const TripMap = ({ origin, destination, busStops = [], liveBusLocation }) => {
+  const originCoords = origin || [22.7295, 75.8762]; // IET DAVV
+  const destinationCoords = destination || [22.6857, 75.8732]; // IT Park
 
   return (
     <div className="h-[70vh] w-full">
@@ -19,12 +19,22 @@ const TripMap = ({ origin, destination, busStops = [] }) => {
           <Popup>Destination</Popup>
         </Marker>
 
-        {/* Optional bus stops */}
         {busStops.map((stop, idx) => (
           <Marker key={idx} position={stop}>
-            <Popup>Bus Stop</Popup>
+            <Popup>Bus Stop {idx + 1}</Popup>
           </Marker>
         ))}
+
+        {/* Live moving bus */}
+        {liveBusLocation && (
+          <Marker position={[liveBusLocation.lat, liveBusLocation.lon]}>
+            <Popup>
+              {liveBusLocation.busName} <br />
+              Next Stop: {liveBusLocation.nextStop} <br />
+              ETA: {liveBusLocation.eta} mins
+            </Popup>
+          </Marker>
+        )}
 
         <RoutingMachine origin={originCoords} destination={destinationCoords} busStops={busStops} />
       </MapContainer>

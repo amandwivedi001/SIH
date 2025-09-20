@@ -10,6 +10,7 @@ const Header = () => {
   const isTrackingPage = location.pathname === "/tracking";
   const isdes = location.pathname === "/destinationSearch";
   const ismap = location.pathname === "/mapView";
+  const ism=location.pathname==="/trip-planner"
 
   const navItems = [
     { to: "/features", label: "Features" },
@@ -24,17 +25,17 @@ const Header = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Left: Logo */}
-<div className="flex items-center space-x-2">
- <div className="w-9 h-9 bg-gradient-to-br from-[#EDB74B] to-[#69541f] rounded-lg flex items-center justify-center shadow-md shadow-[#EDB74B]/40">
-    <LucideBusFront className="w-5 h-5 text-white" />
-  </div>
-  <span className="text-2xl font-extrabold bg-gradient-to-r from-[#EDB74B] to-[#69541f] bg-clip-text text-transparent">
-    Safar
-  </span>
-</div>
+          <div className="flex items-center space-x-2">
+          <div className="w-9 h-9 bg-gradient-to-br from-[#EDB74B] to-[#69541f] rounded-lg flex items-center justify-center shadow-md shadow-[#EDB74B]/40">
+              <LucideBusFront className="w-5 h-5 text-white" />
+            </div>
+            <span className="text-2xl font-extrabold bg-gradient-to-r from-[#EDB74B] to-[#69541f] bg-clip-text text-transparent">
+              Safar
+            </span>
+          </div>
 
             {/* Center: Nav */}
-            {!isTrackingPage && !isdes && !ismap && (
+            {!isTrackingPage && !isdes && !ismap && !ism && (
               <nav className="hidden md:flex items-center space-x-8">
                 {navItems.map((item) => (
                   <NavLink
@@ -54,7 +55,7 @@ const Header = () => {
             )}
 
             {/* Right: Buttons */}
-            {!isTrackingPage && !isdes && !ismap && (
+            {!isTrackingPage && !isdes && !ismap && !ism &&(
               <div className="hidden md:flex items-center space-x-4">
                 <Button
                   variant="ghost"
@@ -75,7 +76,7 @@ const Header = () => {
             )}
 
             {/* Mobile Toggle */}
-            {!isTrackingPage && !isdes && !ismap && (
+            {!isTrackingPage && !isdes && !ismap && !ism &&(
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="md:hidden p-2 rounded-md text-slate-700 hover:text-yellow-700 hover:bg-yellow-100/40 transition"
@@ -86,7 +87,7 @@ const Header = () => {
           </div>
 
           {/* Mobile Nav */}
-          {!isTrackingPage && !isdes && !ismap && isMenuOpen && (
+          {!isTrackingPage && !isdes && !ismap && isMenuOpen && !ism &&(
             <div className="md:hidden py-4 space-y-4 border-t border-yellow-300/40 animate-fade-in">
               <nav className="flex flex-col space-y-4">
                 {navItems.map((item) => (

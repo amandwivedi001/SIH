@@ -1,6 +1,6 @@
 // src/Components/tracking/NearestStop.jsx
 import React, { useState, useEffect } from "react";
-import { MapPin, Clock, Bus, RefreshCw } from "lucide-react";
+import { MapPin, Clock, Bus, RefreshCw, Users } from "lucide-react";
 
 // Mock API function with location support
 const fetchNearestStopData = (userLocation) => {
@@ -10,12 +10,12 @@ const fetchNearestStopData = (userLocation) => {
         reject("Location not available");
       } else {
         resolve({
-          name: "Central Station",
+          name: "Maharaja Ranjeet Singh",
           distance: "200m",
           buses: [
-            { id: 21, eta: "5 min", destination: "City Mall" },
-            { id: 45, eta: "8 min", destination: "Railway Station" },
-            { id: 12, eta: "12 min", destination: "University" },
+{ id: 21, eta: "5 min", destination: "City Mall", occupancy: { filled: 12, capacity: 40 } },
+{ id: 45, eta: "8 min", destination: "Railway Station", occupancy: { filled: 28, capacity: 50 } },
+{ id: 12, eta: "12 min", destination: "University", occupancy: { filled: 45, capacity: 60 } },
           ],
         });
       }
@@ -111,29 +111,41 @@ const NearestStop = ({ userLocation, loadingLocation, geoError }) => {
 
       {/* Bus Cards */}
       <div className="space-y-3">
-        {stop.buses.map((bus) => (
-          <div
-            key={bus.id}
-            className="flex items-center justify-between p-4 rounded-xl border border-slate-200 bg-slate-50 hover:bg-[#EDB74B]/10 transition transform hover:-translate-y-0.5 hover:shadow-md"
-          >
-            {/* Left: Bus Info */}
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-[#EDB74B] text-white shadow-md">
-                <Bus className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="font-semibold text-slate-900">Bus #{bus.id}</p>
-                <p className="text-sm text-slate-600">{bus.destination}</p>
-              </div>
-            </div>
+        {stop.buses.map((bus) => {
+          const filled = bus.occupancy.filled;
+          const capacity = bus.occupancy.capacity;
+          const percent = Math.round((filled / capacity) * 100);
 
-            {/* Right: ETA */}
-            <div className="flex items-center gap-1 text-emerald-600 font-bold">
-              <Clock className="w-4 h-4" />
-              {bus.eta}
+          return (
+            <div
+              key={bus.id}
+              className="flex items-center justify-between p-4 rounded-xl border border-slate-200 bg-slate-50 hover:bg-[#EDB74B]/10 transition transform hover:-translate-y-0.5 hover:shadow-md"
+            >
+              {/* Left: Bus Info */}
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-[#EDB74B] text-white shadow-md">
+                  <Bus className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="font-semibold text-slate-900">Bus #{bus.id}</p>
+                  <p className="text-sm text-slate-600">{bus.destination}</p>
+                </div>
+              </div>
+
+              {/* Right: ETA + Occupancy */}
+              <div className="flex flex-col items-end gap-1">
+                <div className="flex items-center gap-1 text-emerald-600 font-bold">
+                  <Clock className="w-4 h-4" />
+                  {bus.eta}
+                </div>
+                <div className="flex items-center gap-1 text-sm text-slate-600">
+                  <Users className="w-4 h-4 text-slate-500" />
+                  {filled}/{capacity} seats ({percent}%)
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
