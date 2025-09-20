@@ -13,10 +13,3 @@ services:
       - "9001:9001"
     volumes:
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
-
-  cloudflared:
-    image: cloudflare/cloudflared:latest
-    container_name: cloudflared
-    command: tunnel --no-autoupdate --url tcp://mosquitto:1883
-    depends_on:
-      - mosquitto
