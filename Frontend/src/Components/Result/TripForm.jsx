@@ -1,38 +1,37 @@
 import React, { useState } from "react";
 
-// Geocoding helper function
+// Geocode using OpenStreetMap
 const geocode = async (place) => {
   const res = await fetch(
     `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(place)}`
   );
   const data = await res.json();
-  if (data.length > 0) {
-    return [parseFloat(data[0].lat), parseFloat(data[0].lon)];
-  }
+  if (data.length > 0) return [parseFloat(data[0].lat), parseFloat(data[0].lon)];
   return null;
 };
 
 const TripForm = ({ onSearch }) => {
-  const [origin, setOrigin] = useState("");
-  const [destination, setDestination] = useState("Rajwada, Indore");
+  // Default text for input fields
+  const defaultOriginText = "IET DAVV";
+  const defaultDestinationText = "IT Park, Indore";
+
+  const [origin, setOrigin] = useState(defaultOriginText);
+  const [destination, setDestination] = useState(defaultDestinationText);
   const [time, setTime] = useState("09:20");
 
   const handleSubmit = async () => {
-    if (!origin || !destination) {
-      alert("Please enter both origin and destination.");
-      return;
-    }
+    // Default coordinates if user leaves fields empty
+    const defaultOriginCoords = [22.7295, 75.8762]; // IET DAVV
+    const defaultDestinationCoords = [22.7212, 75.8570]; // IT Park, Indore
 
-    // Convert place names to coordinates
-    const originCoords = await geocode(origin);
-    const destinationCoords = await geocode(destination);
+    const originCoords = origin ? await geocode(origin) : defaultOriginCoords;
+    const destinationCoords = destination ? await geocode(destination) : defaultDestinationCoords;
 
     if (!originCoords || !destinationCoords) {
       alert("Could not find one or both locations. Try again.");
       return;
     }
 
-    // Send back coordinates instead of plain text
     onSearch({ origin: originCoords, destination: destinationCoords, time });
   };
 
@@ -47,6 +46,7 @@ const TripForm = ({ onSearch }) => {
       />
       <input
         type="text"
+        placeholder="Enter destination"
         value={destination}
         onChange={(e) => setDestination(e.target.value)}
         className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-yellow-400"

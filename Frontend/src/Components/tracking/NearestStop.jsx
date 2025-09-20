@@ -10,10 +10,10 @@ const fetchNearestStopData = (userLocation) => {
         reject("Location not available");
       } else {
         resolve({
-          name: "Central Station",
+          name: "Maharaja Ranjeet Singh",
           distance: "200m",
           buses: [
-            { id: 21, eta: "5 min", destination: "City Mall" },
+            { id: 21, eta: "5 min", destination: "Teen Imli" },
             { id: 45, eta: "8 min", destination: "Railway Station" },
             { id: 12, eta: "12 min", destination: "University" },
           ],
