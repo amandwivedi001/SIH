@@ -1,1 +1,1 @@
-export const DB_NAME = "RouteX"
+export const DB_NAME = "postgres"
