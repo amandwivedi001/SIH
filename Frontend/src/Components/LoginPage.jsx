@@ -23,12 +23,11 @@ const LoginPage = () => {
             {/* Heading + Paragraph */}
             <div className="space-y-6 order-1">
               <h1 className="text-5xl sm:text-6xl font-extrabold leading-tight">
-                Secure Real-Time{" "}
+                Safar: Real-Time{" "}
                 <span className="text-[#EDB74B]">Bus Tracking</span>
               </h1>
               <p className="text-lg text-slate-600 max-w-xl mx-auto lg:mx-0">
-                Monitor and track your valuable assets with enterprise-grade security,
-                real-time location updates, and intelligent analytics.
+                “Travel smarter with Safar – real-time bus tracking, crowd insights, and reliable updates built for low bandwidth.”
               </p>
             </div>
 
@@ -41,13 +40,13 @@ const LoginPage = () => {
             <div className="grid grid-cols-2 gap-4 sm:gap-6 mt-6 order-3 justify-items-center">
               <div className="bg-[#EDB74B]/10 p-6 rounded-xl shadow-md text-left hover:bg-[#EDB74B]/20 transition w-full max-w-xs">
                 <span className="inline-block w-3 h-3 bg-green-500 rounded-full mr-2"></span>
-                <span className="font-semibold text-slate-900">Live Tracking</span>
-                <p className="text-slate-600 text-sm mt-1">Real-time location updates</p>
+                <span className="font-semibold text-slate-900">Real-time Tracking</span>
+                <p className="text-slate-600 text-sm mt-1">Live bus locations & ETAs</p>
               </div>
               <div className="bg-[#EDB74B]/10 p-6 rounded-xl shadow-md text-left hover:bg-[#EDB74B]/20 transition w-full max-w-xs">
                 <span className="inline-block w-3 h-3 bg-[#EDB74B] rounded-full mr-2"></span>
-                <span className="font-semibold text-slate-900">Secure Access</span>
-                <p className="text-slate-600 text-sm mt-1">End-to-end encryption</p>
+                <span className="font-semibold text-slate-900">Low-bandwidth friendly</span>
+                <p className="text-slate-600 text-sm mt-1">Optmized for poor connectivity</p>
               </div>
             </div>
           </div>
