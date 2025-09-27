@@ -18,7 +18,7 @@ const TripPlanner = () => {
 
     const interval = setInterval(async () => {
       try {
-        const res = await fetch(`http://localhost:8000/api/bus/${selectedBus.busName}/location`);
+        const res = await fetch(`http://localhost:8000/api/bus/location`);
         const data = await res.json();
         setLiveBusLocation({ ...data, busName: selectedBus.busName });
       } catch (err) {
